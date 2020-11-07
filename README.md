@@ -1,2 +1,2 @@
-Encrypting password for security
+Encrypting password for security,
 Resetting Password using nodemailer using nodeJS
