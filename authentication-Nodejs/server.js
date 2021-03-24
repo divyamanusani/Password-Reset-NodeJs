@@ -13,8 +13,7 @@ var randomStr = require("randomstring");
 const dbname = "loginPortal";
 const port = process.env.port || 3000;
 const url = "mongodb://localhost:27017";
-const atlasUrl = 'mongodb+srv://divya-user:19KPcvfGpHnHYYiN@cluster0.xiulw.mongodb.net/loginPortal?retryWrites=true&w=majority';
-//19KPcvfGpHnHYYiN
+const atlasUrl = `mongodb+srv://divya-user:${process.env.mongoPass}@cluster0.xiulw.mongodb.net/${process.env.mongoDb}?retryWrites=true&w=majority`;
 
 
 //configuring
@@ -124,7 +123,7 @@ app.post('/sendMail', async (req, res) => {
         await db.collection('users').updateOne({ email: req.body.email }, { $set: { randomPassword: randomPassCode } });
 
         let mailDetails = {
-            from: 'vinpram5@gmail.com',
+            from: process.env.userEmail,
             to: req.body.email,
             subject: 'Reset Password !!!',
             html: `<h3>Password Reset Code: ${randomPassCode}</h3><p><a href="https://divya-resetpasscode.netlify.app/">Click to reset password</a></p>`
